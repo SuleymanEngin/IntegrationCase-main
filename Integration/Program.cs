@@ -1,29 +1,62 @@
 ﻿using Integration.Service;
+using System;
+using System.Threading;
 
-namespace Integration;
-
-public abstract class Program
+namespace Integration
 {
-    public static void Main(string[] args)
+    public abstract class Program
     {
-        var service = new ItemIntegrationService();
-        
-        ThreadPool.QueueUserWorkItem(_ => service.SaveItem("a"));
-        ThreadPool.QueueUserWorkItem(_ => service.SaveItem("b"));
-        ThreadPool.QueueUserWorkItem(_ => service.SaveItem("c"));
+        public static void Main(string[] args)
+        {
+            var service = new ItemIntegrationService();
 
-        Thread.Sleep(500);
+            // İlk grup istekler
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                var result = service.SaveItem("a");
+                Console.WriteLine(result.Message);
+            });
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                var result = service.SaveItem("b");
+                Console.WriteLine(result.Message);
+            });
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                var result = service.SaveItem("c");
+                Console.WriteLine(result.Message);
+            });
 
-        ThreadPool.QueueUserWorkItem(_ => service.SaveItem("a"));
-        ThreadPool.QueueUserWorkItem(_ => service.SaveItem("b"));
-        ThreadPool.QueueUserWorkItem(_ => service.SaveItem("c"));
+            Thread.Sleep(500);
 
-        Thread.Sleep(5000);
+            // İkinci grup istekler
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                var result = service.SaveItem("a");
+                Console.WriteLine(result.Message);
+            });
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                var result = service.SaveItem("b");
+                Console.WriteLine(result.Message);
+            });
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                var result = service.SaveItem("c");
+                Console.WriteLine(result.Message);
+            });
 
-        Console.WriteLine("Everything recorded:");
+            Thread.Sleep(5000);
 
-        service.GetAllItems().ForEach(Console.WriteLine);
+            Console.WriteLine("Everything recorded:");
 
-        Console.ReadLine();
+            var allItems = service.GetAllItems();
+            foreach (var item in allItems)
+            {
+                Console.WriteLine($"Item ID: {item.Id}, Content: {item.Content}");
+            }
+
+            Console.ReadLine();
+        }
     }
 }
