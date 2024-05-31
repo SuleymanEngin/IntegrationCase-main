@@ -36,7 +36,7 @@ Better solution would be at least we may fallback to local cache if redis is dow
 * **Additional Dependency:** If your stack does not already have Redis, that means additional depenency to manage on your environments.
 * **Complexity Overhead:** Distributed locking introduced extra complexity, difficult to reproduce errors etc.
 
-### Some solutions for weaknesses:
+### Solutions for some weaknesses:
 * Use of hashes instead of whole content texts may solve security and performance issues (if texts are really long)
 * Using SingleServerLockProvider as a fallback if redis is down would at least prevents down of the system and still prevents duplicated calls from same app instance.
 * Configuring redis to persist data to avoid data loss on restarts
