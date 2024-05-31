@@ -1,5 +1,5 @@
 ## Solution Summary:
-* **A thread-safe lock mechanism** was implemented as a dedicated classes based on **Single Reponsibility Principle** and **Encapsulation Principles**.
+* **A thread-safe lock mechanism** was implemented based on **Single Reponsibility Principle** and **Encapsulation Principles**.
 * **ILockProvider** interface is the abstraction of this mechanism, having 2 methods named **AcquireLock** and **ReleaseLock**.
 * **SingleServerLockProvider** was implemented for single server scenaria.
 * **DistributedLockProvider** was implemented for distributed system scenarios.
