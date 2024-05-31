@@ -46,3 +46,17 @@ Better solution would be at least we may fallback to local cache if redis is dow
 
 
 It is a tradeoff to choose between distributed vs local locking mechanism based on their weaknesses and costs.
+
+## Screenshots:
+
+### 1- Single Server Scenario:
+**Console**
+![Console](https://github.com/tursoft/AdCreativeAI.IntegrationCase/blob/solution-by-mtursak/docs/screenshots/1.singleserver-screenshot1-console.png)
+
+### 2 - Distributed System Scenario:
+**Console**
+![Console](https://github.com/tursoft/AdCreativeAI.IntegrationCase/blob/solution-by-mtursak/docs/screenshots/2.distributed-screenshot1-console.png)
+
+**Redis UI**
+![Redis UI](https://github.com/tursoft/AdCreativeAI.IntegrationCase/blob/solution-by-mtursak/docs/screenshots/3.distributed-screenshot2-redis.png)
+
