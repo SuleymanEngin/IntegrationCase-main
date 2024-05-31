@@ -8,4 +8,9 @@
     <LangVersion>11</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="StackExchange.Redis" Version="2.7.33" />
+    <PackageReference Include="System.Runtime.Caching" Version="8.0.0" />
+  </ItemGroup>
+
 </Project>
