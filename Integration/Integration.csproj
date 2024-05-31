@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,5 +7,9 @@
     <Nullable>disable</Nullable>
     <LangVersion>11</LangVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.Caching" Version="8.0.0" />
+  </ItemGroup>
 
 </Project>
