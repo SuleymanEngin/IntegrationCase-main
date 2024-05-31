@@ -11,7 +11,7 @@ public abstract class Program
     {
         Console.Clear();
 
-        var service = CreateItemIntegrationService();
+        var service = CreateItemIntegrationService(false);
         
         // generate data
         var contents = new List<string>();
@@ -72,13 +72,15 @@ public abstract class Program
         Console.ReadLine();
     }
 
-    static ItemIntegrationService CreateItemIntegrationService() {
-        // can be injected by any dependency injection framework
-        //var distributedLockProvider = new DistributedLockProvider("127.0.0.1:6379");
-        //var threadHelper = new ThreadHelper(distributedLockProvider);
+    // ILockProvider implementations can be injected using any DI framework
+    static ItemIntegrationService CreateItemIntegrationService(bool useDistributedLockProvider) {        
+        ILockProvider lockProvider = null;
+        if (useDistributedLockProvider)        
+            lockProvider = new DistributedLockProvider("127.0.0.1:6379");        
+        else
+            lockProvider = new SingleServerCacheProvider();
 
-        var singleServerlockProvider = new SingleServerCacheProvider();
-        var threadHelper = new ThreadHelper(singleServerlockProvider);
+        var threadHelper = new ThreadHelper(lockProvider);
 
         Console.WriteLine($"ThreadHelper: {threadHelper}");
         Console.WriteLine();
